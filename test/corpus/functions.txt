@@ -1,0 +1,131 @@
+================================================================================
+Simple function
+================================================================================
+
+def hello():
+    print("Hello, World!")
+
+--------------------------------------------------------------------------------
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (expression_statement
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (string)))))))
+
+================================================================================
+Function with parameters
+================================================================================
+
+def add(a, b):
+    return a + b
+
+--------------------------------------------------------------------------------
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (identifier)
+      (identifier))
+    body: (block
+      (return_statement
+        (binary_operator
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+Typed function
+================================================================================
+
+def fib(n: int) -> int:
+    return n if n < 2 else fib(n - 1) + fib(n - 2)
+
+--------------------------------------------------------------------------------
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (typed_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    return_type: (type
+      (identifier))
+    body: (block
+      (return_statement
+        (conditional_expression
+          (identifier)
+          (comparison_operator
+            (identifier)
+            (integer))
+          (binary_operator
+            left: (call
+              function: (identifier)
+              arguments: (argument_list
+                (binary_operator
+                  left: (identifier)
+                  right: (integer))))
+            right: (call
+              function: (identifier)
+              arguments: (argument_list
+                (binary_operator
+                  left: (identifier)
+                  right: (integer))))))))))
+
+================================================================================
+Generic function
+================================================================================
+
+def identity[T](x: T) -> T:
+    return x
+
+--------------------------------------------------------------------------------
+
+(module
+  (function_definition
+    name: (identifier)
+    type_parameters: (type_parameter
+      (type
+        (identifier)))
+    parameters: (parameters
+      (typed_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    return_type: (type
+      (identifier))
+    body: (block
+      (return_statement
+        (identifier)))))
+
+================================================================================
+Async function
+================================================================================
+
+async def fetch_data(url: str):
+    return await http_get(url)
+
+--------------------------------------------------------------------------------
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (typed_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (return_statement
+        (await
+          (call
+            function: (identifier)
+            arguments: (argument_list
+              (identifier))))))))

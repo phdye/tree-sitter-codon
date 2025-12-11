@@ -1,0 +1,68 @@
+{
+  "name": "tree-sitter-codon",
+  "version": "0.1.0",
+  "description": "Codon grammar for tree-sitter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phdyex/tree-sitter-codon.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Philip Dyex",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "keywords": [
+    "codon",
+    "tree-sitter",
+    "parser",
+    "python",
+    "compiler",
+    "exaloop"
+  ],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**",
+    "*.wasm"
+  ],
+  "dependencies": {
+    "node-addon-api": "^8.0.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.25.0",
+    "prebuildify": "^6.0.0"
+  },
+  "scripts": {
+    "install": "node-gyp-build",
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js",
+    "generate": "tree-sitter generate",
+    "build": "tree-sitter generate && tree-sitter build",
+    "build-wasm": "tree-sitter build --wasm",
+    "parse": "tree-sitter parse"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.codon",
+      "file-types": [
+        "codon",
+        "py"
+      ],
+      "first-line-regex": "#!.*\\bcodon\\b",
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "^codon$"
+    }
+  ]
+}

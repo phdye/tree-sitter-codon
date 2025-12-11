@@ -1,0 +1,197 @@
+================================================================================
+Pipe expression (simple)
+================================================================================
+
+data |> process
+
+--------------------------------------------------------------------------------
+
+(module
+  (expression_statement
+    (pipe_expression
+      left: (identifier)
+      operator: "|>"
+      right: (identifier))))
+
+================================================================================
+Pipe expression (chained)
+================================================================================
+
+data |> filter |> map |> reduce
+
+--------------------------------------------------------------------------------
+
+(module
+  (expression_statement
+    (pipe_expression
+      left: (pipe_expression
+        left: (pipe_expression
+          left: (identifier)
+          operator: "|>"
+          right: (identifier))
+        operator: "|>"
+        right: (identifier))
+      operator: "|>"
+      right: (identifier))))
+
+================================================================================
+Parallel pipe
+================================================================================
+
+items ||> expensive_computation
+
+--------------------------------------------------------------------------------
+
+(module
+  (expression_statement
+    (pipe_expression
+      left: (identifier)
+      operator: "||>"
+      right: (identifier))))
+
+================================================================================
+Range expression
+================================================================================
+
+1...10
+
+--------------------------------------------------------------------------------
+
+(module
+  (expression_statement
+    (range_expression
+      start: (integer)
+      end: (integer))))
+
+================================================================================
+Codon directive
+================================================================================
+
+## codon: parallel = 4
+
+--------------------------------------------------------------------------------
+
+(module
+  (directive
+    key: (identifier)
+    value: (integer)))
+
+================================================================================
+Generic type parameter
+================================================================================
+
+class Container[T]:
+    value: T
+
+--------------------------------------------------------------------------------
+
+(module
+  (class_definition
+    name: (identifier)
+    type_parameters: (type_parameter
+      (type
+        (identifier)))
+    body: (block
+      (expression_statement
+        (assignment
+          left: (identifier)
+          type: (type
+            (identifier)))))))
+
+================================================================================
+Ptr type annotation
+================================================================================
+
+def get_ptr() -> Ptr[int]:
+    pass
+
+--------------------------------------------------------------------------------
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (type
+      (generic_type
+        (identifier)
+        (type_parameter
+          (type
+            (identifier)))))
+    body: (block
+      (pass_statement))))
+
+================================================================================
+Int[N] type annotation
+================================================================================
+
+def bigint() -> Int[128]:
+    pass
+
+--------------------------------------------------------------------------------
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (type
+      (generic_type
+        (identifier)
+        (type_parameter
+          (type
+            (integer)))))
+    body: (block
+      (pass_statement))))
+
+================================================================================
+C import with type
+================================================================================
+
+from C import malloc: Ptr[byte]
+
+--------------------------------------------------------------------------------
+
+(module
+  (import_from_statement
+    module_name: (identifier)
+    (c_typed_import
+      name: (dotted_name
+        (identifier))
+      type: (type
+        (generic_type
+          (identifier)
+          (type_parameter
+            (type
+              (identifier))))))))
+
+================================================================================
+Match statement
+================================================================================
+
+match x:
+    case 0:
+        print("zero")
+    case _:
+        print("other")
+
+--------------------------------------------------------------------------------
+
+(module
+  (match_statement
+    subject: (identifier)
+    (case_clause
+      pattern: (literal_pattern
+        (integer))
+      consequence: (block
+        (expression_statement
+          (call
+            function: (identifier)
+            arguments: (argument_list
+              (string))))))
+    (case_clause
+      pattern: (wildcard_pattern)
+      consequence: (block
+        (expression_statement
+          (call
+            function: (identifier)
+            arguments: (argument_list
+              (string))))))))

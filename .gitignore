@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build artifacts
+build/
+prebuilds/
+*.node
+*.wasm
+*.dll
+*.lib
+*.exp
+*.so
+*.dylib
+
+# Generated tree_sitter folder only (parser.c is tracked for distribution)
+src/tree_sitter/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+*.egg
+.eggs/
+bindings/python/tree_sitter_codon/*.dll
+bindings/python/tree_sitter_codon/*.so
+bindings/python/tree_sitter_codon/*.pyd
+
+# Local development
+test_*.py
+PROGRESS.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test output
+*.log

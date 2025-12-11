@@ -1,0 +1,24 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "codon",
+      "scope": "source.codon",
+      "path": ".",
+      "file-types": ["codon"],
+      "first-line-regex": "#!.*\\bcodon\\b",
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "^codon$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "Apache-2.0",
+    "authors": [
+      {
+        "name": "Philip Dyex"
+      }
+    ],
+    "description": "Codon grammar for tree-sitter"
+  }
+}
