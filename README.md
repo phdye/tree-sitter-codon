@@ -200,7 +200,7 @@ Apache License 2.0
 
 - [Codon](https://github.com/exaloop/codon) - The Codon compiler
 - [tree-sitter](https://github.com/tree-sitter/tree-sitter) - Parser generator
-- [tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python) - Python grammar (inspiration)
+- [tree-sitter-python](https://github.com/tree-sitter/tree-sitter-python) - Python grammar
 
 ## References
 
